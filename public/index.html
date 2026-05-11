@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistem Booking Ruangan Kampus</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Sistem Booking Ruangan</h1>
+    <div id="user-bar"></div>
+  </header>
+
+  <main id="app">
+    <!-- Auth view -->
+    <section id="auth-view" class="view">
+      <div class="card auth-card">
+        <div class="tabs">
+          <button class="tab active" data-auth-tab="login">Login</button>
+          <button class="tab" data-auth-tab="register">Daftar</button>
+        </div>
+        <form id="login-form" class="auth-form active">
+          <h2>Login</h2>
+          <label>Username<input name="username" required /></label>
+          <label>Password<input name="password" type="password" required /></label>
+          <button type="submit" class="btn-primary">Masuk</button>
+          <p class="hint">Demo: <code>admin/admin123</code>, <code>mahasiswa/mhs123</code></p>
+        </form>
+        <form id="register-form" class="auth-form">
+          <h2>Daftar Akun</h2>
+          <label>Nama Lengkap<input name="full_name" required /></label>
+          <label>Username<input name="username" required /></label>
+          <label>Password (min 6)<input name="password" type="password" minlength="6" required /></label>
+          <button type="submit" class="btn-primary">Daftar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- App view -->
+    <section id="app-view" class="view hidden">
+      <nav class="tabs main-tabs">
+        <button class="tab active" data-tab="calendar">Kalender</button>
+        <button class="tab" data-tab="my-bookings">Booking Saya</button>
+        <button class="tab admin-only" data-tab="approvals">Persetujuan</button>
+        <button class="tab admin-only" data-tab="rooms">Kelola Ruangan</button>
+      </nav>
+
+      <div id="tab-calendar" class="tab-panel active">
+        <div class="toolbar">
+          <label>Ruangan
+            <select id="cal-room"></select>
+          </label>
+          <label>Tanggal
+            <input type="date" id="cal-date" />
+          </label>
+          <button id="btn-new-booking" class="btn-primary">+ Booking Baru</button>
+        </div>
+        <div id="calendar"></div>
+      </div>
+
+      <div id="tab-my-bookings" class="tab-panel">
+        <h2>Booking Saya</h2>
+        <div id="my-bookings-list"></div>
+      </div>
+
+      <div id="tab-approvals" class="tab-panel admin-only">
+        <h2>Permintaan Booking</h2>
+        <div class="toolbar">
+          <label>Filter Status
+            <select id="approval-status">
+              <option value="pending">Pending</option>
+              <option value="approved">Disetujui</option>
+              <option value="rejected">Ditolak</option>
+              <option value="">Semua</option>
+            </select>
+          </label>
+        </div>
+        <div id="approvals-list"></div>
+      </div>
+
+      <div id="tab-rooms" class="tab-panel admin-only">
+        <div class="toolbar">
+          <h2>Kelola Ruangan</h2>
+          <button id="btn-new-room" class="btn-primary">+ Tambah Ruangan</button>
+        </div>
+        <div id="rooms-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <button class="modal-close" data-close>×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
